@@ -63,15 +63,32 @@ function App() {
   }, [lightboxIndex, closeLightbox, showPrev, showNext])
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f] text-gray-100">
+    <div className="min-h-screen bg-surface text-accent selection:bg-white/15">
+      {/* Subtle background texture */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.015]"
+        style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+          backgroundSize: '32px 32px',
+        }}
+      />
+
       <Header
         categories={CATEGORIES}
         activeCategory={activeCategory}
         onFilter={setActiveCategory}
       />
-      <main className="max-w-[1400px] mx-auto px-4 sm:px-8 pb-12">
+
+      <main className="relative max-w-[1400px] mx-auto px-5 sm:px-10 pb-16 pt-6">
         <Gallery images={filtered} onImageClick={openLightbox} />
       </main>
+
+      {/* Footer */}
+      <footer className="relative border-t border-border-subtle py-8 text-center">
+        <p className="text-xs text-muted tracking-wider">
+          Project Gallery &middot; Visual Curations
+        </p>
+      </footer>
+
       {lightboxIndex !== null && (
         <Lightbox
           images={filtered}
